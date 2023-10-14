@@ -58,8 +58,6 @@ a {
 /* Add some styles for body*/
 body {
     min-height: 100vh;
-    max-width: 1280px;
-    margin: 0 auto;
     background: #020617;
     color: #cbd5e1;
     line-height: 1.5;
@@ -68,8 +66,37 @@ body {
     background-size: cover;
     background-attachment: fixed;
     overflow-x: hidden;
-    padding: 4rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
+}
+
+
+/* Main rules */
+
+main {
+    width: 100%;
+}
+
+.container {
+    width: 90%;
+    max-width: 30rem;
+    height: 30rem;
+    background-color: var(--dark-blue);
+    margin: 0 auto;
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.container > h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.container .word-screen{
+    width: 100%;
+    height: 5rem;
+    margin-top: 4rem;
+    background-color: var(--grey);
+    border-radius: .5rem;
 }
