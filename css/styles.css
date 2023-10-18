@@ -42,6 +42,13 @@ body, h1, h2, h3, p, ul, li {
     padding: 0;
 }
 
+button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
 li {
     list-style: none;
 }
@@ -80,7 +87,7 @@ main {
 
 .container {
     width: 90%;
-    max-width: 30rem;
+    /* max-width: 30rem; */
     height: 30rem;
     background-color: var(--dark-blue);
     margin: 0 auto;
@@ -117,11 +124,12 @@ main {
 
 .tries-mistakes {
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 2rem;
     display: flex;
     justify-content: space-between;
     padding: 0 3rem;
-    color: var(--light-grey);
+    color: var(--grey);
+    font-size: .8rem;
 }
 
 .tries-mistakes .tries {
@@ -144,4 +152,42 @@ main {
 
 .dots .dot .active {
     background-color: var(--violet);
+}
+
+/* User input */
+
+.user-input {
+    width: 80%;
+    margin: 4rem auto 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-input .box{
+    width: 3rem;
+    height: 3rem;
+    border: 2px solid var(--grey);
+    background-color: transparent;
+    border-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Reset and random word buttons */
+
+.random-reset {
+    width: 80%;
+    margin: 2rem auto 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.random-reset .btn {
+    color: var(--white);
+    font-weight: 600;
+    background-color: var(--fuchsia);
+    padding: .8rem 2.5rem;
+    border-radius: .5rem;
+    box-shadow: 0px 0.3rem 0rem rgba(201, 81, 231, .5);
 }

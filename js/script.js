@@ -2,7 +2,7 @@ import { words } from "./words.js";
 import { getWord } from "./utils.js";
 
 // Game constants
-const MAX_TRIES = 5;
+const MAX_TRIES = 6;
 
 // Game initial state
 let currentWord = getWord(words[Math.floor(Math.random() * words.length)]);
@@ -14,6 +14,10 @@ let currentMistakes = []; // array of wrong letters
 const wordScreen = document.querySelector("#word-screen");
 const lettersContainer = wordScreen.querySelector(".letters-container");
 const mistakeDots = document.querySelectorAll(".tries-mistakes .dots .dot");
+const userInput = document.querySelector(".user-input");
+
+const randomButton = document.querySelector("#random-btn");
+const reetButton = document.querySelector("#reset-btn");
 
 console.log(mistakeDots)
 console.log(wordScreen)
@@ -40,8 +44,32 @@ function resetGame () {
     displayWord();
 }
 
-// start when page loads
+function displayUserInputBoxes () {
+    const numberOfBoxes = currentWord.scrambledWord.length;
+    for (let i = 0; i < numberOfBoxes; i++) {
+        let box = document.createElement("input");
+        box.setAttribute("type", "text");
+        box.classList.add("box");
+        userInput.appendChild(box);
+    }
+}
 
+function removeUserInputBoxes () {
+    userInput.innerHTML = "";
+}
+
+// start when page loads
 document.addEventListener("DOMContentLoaded", () => {
     displayWord();
+    displayUserInputBoxes();
+
+
+    randomButton.addEventListener("click", () => {
+        currentWord = getWord(words[Math.floor(Math.random() * words.length)]);
+        lettersContainer.innerHTML = "";
+        displayWord();
+        removeUserInputBoxes();
+        displayUserInputBoxes();
+    });
+    reetButton.addEventListener("click", resetGame);
 });
