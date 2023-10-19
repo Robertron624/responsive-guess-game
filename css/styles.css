@@ -87,7 +87,7 @@ main {
 
 .container {
     width: 90%;
-    /* max-width: 30rem; */
+    max-width: 30rem;
     height: 30rem;
     background-color: var(--dark-blue);
     margin: 0 auto;
@@ -134,6 +134,7 @@ main {
 
 .tries-mistakes .tries {
     display: flex;
+    align-items: center;
     gap: .5rem;
 }
 
@@ -150,8 +151,25 @@ main {
     background-color: var(--light-grey);
 }
 
-.dots .dot .active {
-    background-color: var(--violet);
+.dots .dot.active {
+    background-color: var(--violet) !important;
+}
+
+.tries-mistakes .mistakes {
+    display: flex;
+    align-items: center;
+}
+
+.tries-mistakes .mistakes .mistakes-container{
+    margin-left: .6rem;
+    font-size: 1rem;
+    color: var(--light-grey);
+    display: flex;
+    gap: .3rem;
+}
+
+.tries-mistakes .mistakes .mistakes-container li {
+
 }
 
 /* User input */
@@ -168,10 +186,14 @@ main {
     height: 3rem;
     border: 2px solid var(--grey);
     background-color: transparent;
+    color: var(--white);
+    text-align: center;
     border-radius: .5rem;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    font-size: 1.5rem;
 }
 
 /* Reset and random word buttons */
@@ -190,4 +212,9 @@ main {
     padding: .8rem 2.5rem;
     border-radius: .5rem;
     box-shadow: 0px 0.3rem 0rem rgba(201, 81, 231, .5);
+    transition: all .3s ease-in-out;
+}
+
+.random-reset .btn:hover {
+    filter: brightness(1.2);
 }
