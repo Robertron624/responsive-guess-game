@@ -35,6 +35,19 @@ function displayWord () {
     }
 }
 
+function isKeyValid (key) {
+    // Check if key is a letter from the alphabet
+    let isValid = false;
+
+    if(key.length > 1) return isValid;
+
+    const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+    if(alphabet.includes(key)) isValid = true;
+
+    return isValid;
+}
+
 function resetGame () {
     currentWord = getWord(words[Math.floor(Math.random() * words.length)]);
     currentTries = 0;
@@ -59,35 +72,37 @@ function removeUserInputBoxes () {
     userInput.innerHTML = "";
 }
 
-function checkValidCharacter (letter) {
-    const {scrambledWord} = currentWord;
+function checkValidCharacter (letter, index) {
+    const {originalWord} = currentWord;
     let isCorrect = false;
-    for (let i = 0; i < scrambledWord.length; i++) {
-        if (scrambledWord[i] === letter) {
-            isCorrect = true;
-            let letterBoxes = document.querySelectorAll(".box");
 
-            let letterBox = letterBoxes[i].value 
-
-            if(letterBox !== "") {
-                letterBoxes[i].value += letter;
-            }
-        }
+    // check if the letter introduced is in the word at the index position
+    if (originalWord[index] === letter) {
+        console.log("Letter is correct")
+        isCorrect = true;
     }
+
     return isCorrect;
 }
 
 function checkIfUserWon (letter) {
     let userWon = false;
-    const {word} = currentWord;
+    const {originalWord} = currentWord;
     let userWord = "";
     let letterBoxes = document.querySelectorAll(".box");
     letterBoxes.forEach(box => userWord += box.value);
-    userWord += letter;
+    // userWord += letter;
 
-    if (userWord === word) {
+    console.log("User word: ", userWord)
+    console.log("Word: ", originalWord)
+
+    if (userWord === originalWord) {
         userWon = true;
+        console.log("User won!")
     }
+
+    console.log("User word: ", userWord)
+    console.log("Won: ", userWon)
 
     return userWon;
 }
@@ -112,32 +127,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const boxes = document.querySelectorAll(".user-input .box");
 
-    boxes.forEach(box => {
+    boxes.forEach((box, index) => {
         box.addEventListener("keyup", (e) => {
+
+
+            if(!isKeyValid(e.key)) {
+                console.log("Invalid key")
+                e.target.value = "";
+                return;
+            };
+
             const letter = e.target.value;
-            const isCorrect = checkValidCharacter(letter);
-            if (!isCorrect) {
+
+            let isValid  = checkValidCharacter(letter, index);
+
+            if(isValid) {
+                e.target.value = letter;
+                checkIfUserWon(letter) ? alert("You won!") : null;
+            }
+            else {
                 currentTries++;
                 currentMistakes.push(letter);
                 mistakeDots[currentTries - 1].classList.add("active");
-
-                let mistakeListItem = document.createElement("li");
-
-                mistakeListItem.textContent = letter;
-
-                mistakesContainer.appendChild(mistakeListItem);
+                mistakesContainer.textContent = currentMistakes.join(", ");
+                // removing the last letter from the input box
                 e.target.value = "";
             }
 
-            if (currentTries === MAX_TRIES) {
-                alert("You lost!");
-                resetGame();
-            }
-
-            if (checkIfUserWon(letter)) {
-                alert("You won!");
-                resetGame();
-            }
         });
     });
 
