@@ -178,7 +178,8 @@ main {
     width: 80%;
     margin: 4rem auto 0;
     display: flex;
-    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .user-input .box{
