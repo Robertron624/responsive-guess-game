@@ -33,6 +33,15 @@ function displayWord () {
     }
 }
 
+function checkIfGameOver () {
+    let isGameOver = false;
+    if (currentTries === MAX_TRIES) {
+        isGameOver = true;
+    }
+
+    return isGameOver;
+}
+
 function addEventListenersToBoxes () {
     const boxes = document.querySelectorAll(".user-input .box");
 
@@ -52,16 +61,24 @@ function addEventListenersToBoxes () {
             if(isValid) {
                 e.target.value = letter;
                 checkIfUserWon(letter) ? alert("You won!") : null;
+                checkIfGameOver();
             }
             else {
                 currentTries++;
                 currentMistakes.push(letter);
+                let isGameOver = checkIfGameOver();
+
+                if(isGameOver) {
+                    alert("Game Over!");
+                    resetGame();
+                    return;
+                };
+
                 mistakeDots[currentTries - 1].classList.add("active");
                 mistakesContainer.textContent = currentMistakes.join(", ");
                 // removing the last letter from the input box
                 e.target.value = "";
             }
-
         });
     });
 }
@@ -86,6 +103,7 @@ function resetGame () {
     lettersContainer.innerHTML = "";
     removeUserInputBoxes();
     mistakeDots.forEach(dot => dot.classList.remove("active"));
+    mistakesContainer.textContent = "";
     displayWord();
     displayUserInputBoxes();
     addEventListenersToBoxes();
