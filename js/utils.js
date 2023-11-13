@@ -13,3 +13,16 @@ export function getWord(originalWord) {
         scrambledWord: getScrambleWord(originalWord),
     };
 }
+
+export function isKeyValid (key) {
+    // Check if key is a letter from the alphabet
+    let isValid = false;
+
+    if(key.length > 1) return isValid;
+
+    const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+    if(alphabet.includes(key)) isValid = true;
+
+    return isValid;
+}
